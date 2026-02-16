@@ -633,4 +633,83 @@ body {
     .side-tooltip { display: none; }
 }
 
-            
+.main-footer {
+    background: var(--dark-green);
+    padding: 60px 0 20px;
+    border-top: 5px solid #82c341; 
+    color: #ffffff; /* Ana metin rengini beyaz yaptık */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.main-footer h3 {
+    color: #82c341; 
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav ul li {
+    margin-bottom: 10px;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: #e0e0e0; /* Link rengini açık gri yaptık */
+    transition: color 0.3s;
+}
+
+.footer-nav ul li a:hover {
+    color: #82c341; /* Hover rengini yeşile çektik */
+}
+
+.footer-contact p {
+    color: #e0e0e0; /* İletişim bilgilerini açık gri yaptık */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; 
+    gap: 20px;               
+    margin-top: 10px;
+}
+
+.footer-icon img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s;
+    filter: invert(-100%); /* İkonları koyu zeminde beyaz yaptık */
+}
+
+.footer-icon:hover img {
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Çizgiyi şeffaf beyaz yaptık */
+    padding-top: 20px;
+    font-size: 14px;
+    color: #aaaaaa; /* Alt yazıyı sönük gri yaptık */
+}
+
+/* Mobilde footer'ı alt alta dizelim */
+@media screen and (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+}

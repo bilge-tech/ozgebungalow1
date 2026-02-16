@@ -146,3 +146,34 @@ window.addEventListener("scroll", reveal);
 
 // Sayfa ilk açıldığında da çalışması için (en üstteki bölümler için):
 reveal();
+
+
+const googleYorumlari = [
+    { isim: "Tuba Altun", yorum: "15 senedir geliyoruz güzel küçük bir aile işletmesi çalışanlar güleryüzlü ve odaların temizliği güzeldi , akşam yemeği yok ama kahvaltısı lezzetli ve çeşitli huzurlu sakin bir tatil için güzel bir işletme", puan: "⭐⭐⭐⭐⭐" },
+    { isim: "Zeynep Özen", yorum: "Çıralı’da çok güzel bir tatil geçirdim. Odalar çok konforluydu, herkes güler yüzlü ve ilgiliydi çok memnun kaldım. Keyifli ve huzurlu bir tatil geçirmek isteyen herkese tavsiye ederim.", puan: "⭐⭐⭐⭐⭐" },
+    { isim: "Fly Yoga", yorum: "Прекрасное уютное место!И очень душевные хозяева, вкусные завтраки и супер йога зал", puan: "⭐⭐⭐⭐⭐" },
+    { isim: "Claudia Kostka", yorum: "Cirali, für mich die schönste Bucht am Mittelmeer und das Özge-Hotel eine traumhafte Oase - 5 Minuten vom Meer. Bungalows in einem Garten mit Obstbäumen, Palmen und Blumen geführt von einer bezauberten Familie. Das reichhaltige Frühstück besteht aus im Garten gereiften Gemüse, selbst hergestellter Marmelade und anderen Leckereien. Wunderbar. Das Paradis!", puan: "⭐⭐⭐⭐⭐" },
+    { isim: "Wilma Busker", yorum: "For nature, peace and a quiet place you must visit Özge Hotel & Bungalows. Clean bungalows in a beautiful garden and on walking distance of a lovely beach. Very friendly owners and staff. After one visit you want to return every year!", puan: "⭐⭐⭐⭐⭐" },
+    { isim: "Selin B.", yorum: "Portakal ağaçları altında kahvaltı yapmak paha biçilemez. Kesinlikle tavsiye ederim.", puan: "⭐⭐⭐⭐⭐" }
+];
+
+function yorumlariGoster() {
+    const container = document.getElementById('dynamic-reviews-container');
+    if(!container) return;
+
+    // Yorum havuzunu karıştır ve ilk 3 tanesini al
+    const secilenYorumlar = [...googleYorumlari]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+
+    container.innerHTML = secilenYorumlar.map(item => `
+        <div class="review-card">
+            <div class="stars">${item.puan}</div>
+            <p>"${item.yorum}"</p>
+            <span class="reviewer">- ${item.isim}</span>
+        </div>
+    `).join('');
+}
+
+// Sayfa yüklendiğinde yorumları getir
+document.addEventListener('DOMContentLoaded', yorumlariGoster);
