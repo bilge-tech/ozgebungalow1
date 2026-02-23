@@ -117,15 +117,21 @@ window.addEventListener('scroll', () => {
     });
 });
 
-function translatePage(langCode) {
+function translatePage(langCode, retryCount = 0) {
     const googleCombo = document.querySelector('.goog-te-combo');
+    
     if (googleCombo) {
         googleCombo.value = langCode;
         googleCombo.dispatchEvent(new Event('change'));
     } else {
-        console.error("Google Translate henüz yüklenmedi. Lütfen bir saniye bekleyip tekrar deneyin.");
-        // Eğer yüklenmediyse kutuyu bulmaya çalışması için küçük bir gecikme
-        setTimeout(() => translatePage(langCode), 500);
+        // En fazla 10 kez denesin (yaklaşık 5 saniye bekleme)
+        if (retryCount < 10) {
+            console.warn("Google Translate widget'ı bekleniyor...");
+            setTimeout(() => translatePage(langCode, retryCount + 1), 500);
+        } else {
+            // 10 denemeden sonra hala bulamadıysa sonsuz döngüye girmeden durur
+            console.error("Google Translate altyapısı yüklenemedi. Lütfen internet bağlantınızı kontrol edip sayfayı yenileyin.");
+        }
     }
 }
 
