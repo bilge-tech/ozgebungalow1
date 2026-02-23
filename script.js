@@ -14,17 +14,33 @@ let autoSlider = setInterval(() => {
 }, 2000);
 
 function moveSlider(button, direction, isAuto = false) {
-    if (!isAuto) clearInterval(autoSlider);
+    // isAuto true değilse ve autoSlider tanımlıysa zamanlayıcıyı durdur
+    if (!isAuto && typeof autoSlider !== 'undefined') {
+        clearInterval(autoSlider);
+    }
 
     const slider = button.closest('.oda-slider');
-    const imgs = slider.querySelectorAll('.slider-images img');
-    let index = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+    
+    // 1. İHTİMAL: Önce bizim yeni kurduğumuz şık yapıyı (slide-item) ara
+    let slides = slider.querySelectorAll('.slider-images .slide-item');
+    
+    // 2. İHTİMAL: Eğer bulamazsa (yani o odayı henüz güncellemediysen), eski resim yapısını (img) kullan
+    if (slides.length === 0) {
+        slides = slider.querySelectorAll('.slider-images > img');
+    }
+    
+    // Eğer o bölümde hiçbir resim yoksa, hata vermemesi için işlemi sessizce durdur
+    if (slides.length === 0) return; 
 
-    imgs[index].classList.remove('active');
-    index = (index + direction + imgs.length) % imgs.length;
-    imgs[index].classList.add('active');
+    // Aktif olan slaytı bul
+    let index = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    if (index === -1) index = 0; 
+
+    // Slaytı değiştir
+    slides[index].classList.remove('active');
+    index = (index + direction + slides.length) % slides.length;
+    slides[index].classList.add('active');
 }
-
 function toggleOverlay(btn) {
     const card = btn.closest('.oda-kart');
     const overlay = card.querySelector('.oda-bilgi-overlay');
@@ -160,7 +176,6 @@ const googleYorumlari = [
     { isim: "Fly Yoga", yorum: "Прекрасное уютное место!И очень душевные хозяева, вкусные завтраки и супер йога зал", puan: "⭐⭐⭐⭐⭐" },
     { isim: "Claudia Kostka", yorum: "Cirali, für mich die schönste Bucht am Mittelmeer und das Özge-Hotel eine traumhafte Oase - 5 Minuten vom Meer. Bungalows in einem Garten mit Obstbäumen, Palmen und Blumen geführt von einer bezauberten Familie. Das reichhaltige Frühstück besteht aus im Garten gereiften Gemüse, selbst hergestellter Marmelade und anderen Leckereien. Wunderbar. Das Paradis!", puan: "⭐⭐⭐⭐⭐" },
     { isim: "Wilma Busker", yorum: "For nature, peace and a quiet place you must visit Özge Hotel & Bungalows. Clean bungalows in a beautiful garden and on walking distance of a lovely beach. Very friendly owners and staff. After one visit you want to return every year!", puan: "⭐⭐⭐⭐⭐" },
-    { isim: "Selin B.", yorum: "Portakal ağaçları altında kahvaltı yapmak paha biçilemez. Kesinlikle tavsiye ederim.", puan: "⭐⭐⭐⭐⭐" }
 ];
 
 function yorumlariGoster() {
