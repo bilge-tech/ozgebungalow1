@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Site haritasının yerini Google'a bildiriyoruz
+Sitemap: https://www.ozgebungalow.com/sitemap.xml
