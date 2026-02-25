@@ -203,6 +203,16 @@ body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; top: 0px !impo
     .nav-toggle:checked ~ .nav-menu { transform: translateX(0); }
     .rooms-wrapper { flex-direction: column; align-items: center; gap: 40px; }
     .oda-konteyner { width: 100%; max-width: 500px; }
+    .mobile-only .lang-switcher {
+        gap: 10px; /* Mobilde bayrakların arasını biraz açalım ki parmaklar yanındakine çarpmasın */
+        justify-content: center;
+    }
+    
+    .mobile-only .lang-switcher a {
+        width: 32px; /* 24px mobilde parmak için çok küçüktür, biraz büyütüyoruz */
+        padding: 10px; /* Her bayrağın etrafına 10 piksellik GÖRÜNMEZ dokunma alanı ekler */
+        box-sizing: content-box; /* Padding'in bayrağın kendi şeklini bozmasını engeller */
+    }
 }
 
 @media screen and (max-width: 950px) {
